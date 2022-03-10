@@ -5,6 +5,7 @@ class Grid {
         this.row = row;
         this.createGrid();
         this.createReplay();
+        this.createTurnCount();
     }
 
     createGrid() {
@@ -31,6 +32,13 @@ class Grid {
 
         button.innerHTML = "Replay";
         this.element.appendChild(button);
+    }
+
+    createTurnCount() {
+        var span = document.createElement("span");
+
+        span.innerHTML = 0;
+        this.element.appendChild(span);
     }
 
 }
@@ -103,12 +111,20 @@ function replayGame() {
     $(".cell").each(function() {
         $(this).attr("id", "off")
     });
+
+    $("span").html("0");
+}
+
+function countTurn() {
+    var i = $("span").html();
+    $("span").html(++i);
 }
 
 $(document).ready(function() {
     initGame();
     $("td").click(function() {
         toggle(this);
+        countTurn();
     });
 
     $("button").click(function() {
