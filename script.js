@@ -3,12 +3,6 @@ class Grid {
         this.element = document.querySelector(element_id);
         this.col = col;
         this.row = row;
-        this.grid = Array(this.row);
-
-        for (var i=0; i<this.row; i++) {
-            this.grid[i] = Array(this.col).fill(0);
-        }
-
         this.createGrid();
     }
 
@@ -19,13 +13,23 @@ class Grid {
             var tr = table.appendChild(document.createElement("tr"));
 
             for (var j=0; j<this.col; j++) {
-                var td = tr.appendChild(document.createElement("td"));
+                var td = document.createElement("td");
+                
+                td.setAttribute("id", "off");
+                tr.appendChild(td);
             }
         }
 
         this.element.innerHTML = "";
         this.element.appendChild(table);
     }
+
 }
 
 var c4 = new Grid(".gameManager")
+
+$(document).ready(function() {
+    $("td").click(function() {
+        $(this).attr("id","on");
+    })
+})

@@ -18,6 +18,13 @@ html {
     width: 90px;
     height: 90px;
     border:3px solid black;
-    background-color: purple;
     cursor: pointer;
+}
+
+#off {
+    background-color: purple;
+}
+
+#on {
+    background-color: gold;
 }
