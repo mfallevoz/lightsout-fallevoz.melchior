@@ -79,8 +79,6 @@ function toggle(cell) {
     cellGlobalIndex = $(cell).index() + rowIndex * 5;
 
     changeState(cell);
-    console.log(cellLocalIndex);
-    console.log(cellGlobalIndex);
 
     if (cellLocalIndex > 0) {
         changeState($(".cell").eq(cellGlobalIndex-1));
@@ -111,6 +109,8 @@ function replayGame() {
     $(".cell").each(function() {
         $(this).attr("id", "off")
     });
+
+    initGame();
 
     $("span").html("0");
 }
