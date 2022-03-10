@@ -15,6 +15,7 @@ class Grid {
             for (var j=0; j<this.col; j++) {
                 var td = document.createElement("td");
                 
+                td.setAttribute("class", "cell");
                 td.setAttribute("id", "off");
                 tr.appendChild(td);
             }
@@ -26,10 +27,48 @@ class Grid {
 
 }
 
-var c4 = new Grid(".gameManager")
+function changeState(cell) {
+    switch ($(cell).attr("id")) {
+        case "on":
+            $(cell).attr("id","off");
+            break;
+
+        case "off":
+            $(cell).attr("id","on");
+            break;
+    }
+}
+
+function toggle(cell) {
+    rowIndex = $(cell).parent().index();
+    cellLocalIndex = $(cell).index() + rowIndex;
+    cellGlobalIndex = $(cell).index() + rowIndex * 5;
+
+    changeState(cell);
+
+    if (cellLocalIndex > 0) {
+        changeState($(".cell").eq(cellGlobalIndex-1));
+    }
+
+    if (cellLocalIndex < 5) {
+        changeState($(".cell").eq(cellGlobalIndex+1));
+    }
+
+    if (cellLocalIndex%5 > 0) {
+        changeState($(".cell").eq(cellGlobalIndex-5));
+    }
+
+    if (cellLocalIndex%5 < 5) {
+        changeState($(".cell").eq(cellGlobalIndex+5));
+    }
+}
 
 $(document).ready(function() {
+    
     $("td").click(function() {
-        $(this).attr("id","on");
+
+        toggle(this);
     })
 })
+
+var c4 = new Grid(".gameManager")
