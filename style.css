@@ -1,0 +1,10 @@
+.gameManager table {
+    background-color: black;
+}
+
+.gameManager td {
+    width: 90px;
+    height: 90px;
+    background-color: white;
+    cursor: pointer;
+}
