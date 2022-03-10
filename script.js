@@ -27,6 +27,24 @@ class Grid {
 
 }
 
+function getRandomInt(maxValue) {
+    return Math.floor(Math.random() * maxValue);
+}
+
+function getArrayRandomInt(length, maxValue) {
+    var array = [];
+    
+    while(array.length < length) {
+        var randomInt = getRandomInt(maxValue);
+
+        if (array.indexOf(randomInt) === -1) {
+            array.push(randomInt);
+        }
+    }
+
+    return array;
+}
+
 function changeState(cell) {
     switch ($(cell).attr("id")) {
         case "on":
@@ -63,10 +81,17 @@ function toggle(cell) {
     }
 }
 
-$(document).ready(function() {
-    
-    $("td").click(function() {
+function initGame() {
+    array = getArrayRandomInt(5, 24);
 
+    for (var i=0; i<array.length; i++) {
+        changeState($(".cell").eq(array[i]));
+    }
+}
+
+$(document).ready(function() {
+    initGame();
+    $("td").click(function() {
         toggle(this);
     })
 })
