@@ -17,8 +17,21 @@ html {
 .gameManager td {
     width: 90px;
     height: 90px;
-    border:3px solid black;
+    border: 3px solid black;
     cursor: pointer;
+}
+
+.gameManager button {
+    margin-left: 50px;
+    line-height: 60px;
+    font-weight: bold;
+    padding: 0 40px;
+    background-color: salmon;
+    border: none;
+}
+
+.gameManager button:hover {
+    background-color: lightsalmon;
 }
 
 #off {

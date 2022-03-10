@@ -4,6 +4,7 @@ class Grid {
         this.col = col;
         this.row = row;
         this.createGrid();
+        this.createReplay();
     }
 
     createGrid() {
@@ -23,6 +24,13 @@ class Grid {
 
         this.element.innerHTML = "";
         this.element.appendChild(table);
+    }
+
+    createReplay() {
+        var button = document.createElement("button");
+
+        button.innerHTML = "Replay";
+        this.element.appendChild(button);
     }
 
 }
@@ -59,24 +67,26 @@ function changeState(cell) {
 
 function toggle(cell) {
     rowIndex = $(cell).parent().index();
-    cellLocalIndex = $(cell).index() + rowIndex;
+    cellLocalIndex = $(cell).index();
     cellGlobalIndex = $(cell).index() + rowIndex * 5;
 
     changeState(cell);
+    console.log(cellLocalIndex);
+    console.log(cellGlobalIndex);
 
     if (cellLocalIndex > 0) {
         changeState($(".cell").eq(cellGlobalIndex-1));
     }
 
-    if (cellLocalIndex < 5) {
+    if (cellLocalIndex < 4) {
         changeState($(".cell").eq(cellGlobalIndex+1));
     }
 
-    if (cellLocalIndex%5 > 0) {
+    if (rowIndex > 0) {
         changeState($(".cell").eq(cellGlobalIndex-5));
     }
 
-    if (cellLocalIndex%5 < 5) {
+    if (rowIndex < 4) {
         changeState($(".cell").eq(cellGlobalIndex+5));
     }
 }
@@ -89,11 +99,21 @@ function initGame() {
     }
 }
 
+function replayGame() {
+    $(".cell").each(function() {
+        $(this).attr("id", "off")
+    });
+}
+
 $(document).ready(function() {
     initGame();
     $("td").click(function() {
         toggle(this);
-    })
+    });
+
+    $("button").click(function() {
+        replayGame();
+    });
 })
 
-var c4 = new Grid(".gameManager")
+var c4 = new Grid(".gameManager");
